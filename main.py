@@ -1,12 +1,15 @@
 def student_menu():
     # Display student menu
-    print("\n===== Student Violation System =====")
-    print("1. List All Record(s)")
-    print("2. Add Record(s)")
-    print("3. Update Record(s)")
-    print("4. Delete Record(s)")
-    print("5. Search Record(s)")
+    print("------------------------------------------")
+    print("    Student Violation Management System   ")
+    print("------------------------------------------")
+    print("1. List All")
+    print("2. Add")
+    print("3. Update")
+    print("4. Delete")
+    print("5. Search")
     print("6. Exit")
+    print("------------------------------------------")
 
 def list_all_records(students):
     if not students:
@@ -42,7 +45,7 @@ def update_record(students):
     try: 
         record_id = int(input("\nEnter the student number to update: "))
         if 1 <= record_id <= len(students):
-            print("Leave balnk to keep current value.")
+            print("Leave blank to keep current value.")
 
             for key in students[record_id - 1]:
                 new_value = input(f"{key} ({students[record_id - 1][key]}): ")
@@ -69,7 +72,8 @@ def delete_record(student):
         print("Please enter a valid number.")
 
 def search_student(student): 
-    keyword = input("\nEnter student number, name, or violation to search: ")
+    keyword = input("\nEnter student number, name, "
+                     "or violation to search: ").lower()
     found = False
 
     for idx, students in enumerate(student, 1):
