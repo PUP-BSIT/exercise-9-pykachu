@@ -35,7 +35,7 @@ def add_record(student):
     student.append(student_record)
     print("Violation record added successfully!")
 
-def update_record(student):
+def update_record(student): #initial code for update_record
     list_all(student)
 
     record_id = int(input("Enter the ID of the record to update: "))  
