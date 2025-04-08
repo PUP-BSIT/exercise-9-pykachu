@@ -54,11 +54,20 @@ def update_record(student): #initial code for update_record
 
     return student
 
+def delete_record(student):
+    list_all(student)
+    try:
+        idx = int(input("Enter the student number to delete: "))
+        if 1 <= idx <= len(student):
+            del student[idx - 1]
+            print("Student record deleted successfully!")
+        else:
+            print("Invalid student number.")
+    except ValueError:
+        print("Please enter a valid number.")
+
 def main():
-    student_record = [
-        {'Name': 'Bench', 'Id': 10012, 'Course': 'BSIT', 
-          'Violation': 'No ID', 'Date': 'January 10, 2025'}
-    ]
+    student_record = []    
 
     while True:
         student_menu()
