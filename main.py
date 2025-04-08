@@ -66,6 +66,20 @@ def delete_record(student):
     except ValueError:
         print("Please enter a valid number.")
 
+def search_student(student): 
+    keyword = input("Enter student name or violation to search: ").lower()
+    found = False
+
+    for s in student:
+        if keyword in s["Student Name"] or keyword in s["Violation"]:
+            print("\n--- Record Found ---")
+            for key, value in s.items():
+                print(f"{key}: {value}")
+            found = True
+
+    if not found:
+        print("No matching record found.")
+
 def main():
     student_record = []    
 
