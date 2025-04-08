@@ -16,11 +16,27 @@ def list_all(student):
             for key, value in student.items():
                 print(f"  {key}: {value}")    
 
+def add_record(student):
+    print("\nAdd a student violation record:")
+    name = input("Student Name: ")
+    student_id = int(input("Student ID: "))
+    course_year = input("Course & Year: ")
+    violation = input("Violation: ")
+    date = input("Date of Violation (YYYY-MM-DD): ")
+
+    student_record = {
+        "Student Name": name,
+        "Student ID": student_id,
+        "Course & Year": course_year,
+        "Violation": violation,
+        "Date": date
+    }
+
+    student.append(student_record)
+    print("Violation record added successfully!")
+
 def main():
-    student_record = [
-        {'Name': 'Bench', 'Id': 10012, 'Course': 'BSIT', 
-          'Violation': 'No ID', 'Date': 'January 10, 2025'}
-    ]
+    student_record = []
 
     while True:
         print_menu()
@@ -30,7 +46,6 @@ def main():
             case '1':
                 list_all(student_record)
             case '2':
-                #TODO(Serquina): Do add_record.
                 add_record(student_record)
             case '3':
                 #TODO(Besa): Do update_record.
