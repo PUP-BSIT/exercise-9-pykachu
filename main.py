@@ -1,25 +1,26 @@
 def student_menu():
+    # Display student menu
     print("\n===== Student Violation System =====")
-    print("1. List All")
-    print("2. Add")
-    print("3. Update")
-    print("4. Delete")
-    print("5. Search")
+    print("1. List All Record(s)")
+    print("2. Add Record(s)")
+    print("3. Update Record(s)")
+    print("4. Delete Record(s)")
+    print("5. Search Record(s)")
     print("6. Exit")
 
-def list_all(student):
-    if not student:
+def list_all_records(students):
+    if not students:
         print("No student records available.")
     else:
-        for num, student in enumerate(student, 1):
+        for num, student in enumerate(students, 1):
             print(f"\nStudent #{num}:")
             for key, value in student.items():
-                print(f"  {key}: {value}")
+                print(f"{key}: {value}")
 
-def add_record(student):
+def add_record(students):
     print("\nAdd a student violation record:")
     name = input("Student Name: ")
-    student_id = int(input("Student ID: "))
+    student_id = (input("Student ID: "))
     course_year = input("Course & Year: ")
     violation = input("Violation: ")
     date = input("Date of Violation (YYYY-MM-DD): ")
@@ -32,48 +33,52 @@ def add_record(student):
         "Date": date
     }
 
-    student.append(student_record)
-    print("Violation record added successfully!")
+    students.append(student_record)
+    print("Student record added successfully!")
 
-def update_record(student): #initial code for update_record
-    list_all(student)
+def update_record(students):
+    list_all_records(students)
 
-    record_id = int(input("Enter the ID of the record to update: "))  
+    try: 
+        record_id = int(input("\nEnter the student number to update: "))
+        if 1 <= record_id <= len(students):
+            print("Leave balnk to keep current value.")
 
-    if 0 <= record_id < len(student):
-        print("Leave blank to keep current ID.")
+            for key in students[record_id - 1]:
+                new_value = input(f"{key} ({students[record_id - 1][key]}): ")
+                if new_value:
+                    students[record_id - 1][key] = new_value
 
-        for key in student[record_id]:
-            new_value = input(f"{key} ({student[record_id][key]}): ")
-
-            if new_value:
-                student[record_id][key] = new_value
-        print("Student record updated successfully!")
-    else:
-        print("Invalid ID.")
-
-    return student
+            print("Student record updated successfully!")
+        else:
+            print("No record found.")
+    except ValueError:
+        print("Invalid input. Please enter a valid number.")
 
 def delete_record(student):
-    list_all(student)
+    list_all_records(student)
+
     try:
-        idx = int(input("Enter the student number to delete: "))
+        idx = int(input("\nEnter the student number to delete: "))
         if 1 <= idx <= len(student):
             del student[idx - 1]
             print("Student record deleted successfully!")
         else:
-            print("Invalid student number.")
+            print("No student number/records found.")
     except ValueError:
         print("Please enter a valid number.")
 
 def search_student(student): 
-    keyword = input("Enter student name or violation to search: ").lower()
+    keyword = input("\nEnter student number, name, or violation to search: ")
     found = False
 
-    for s in student:
-        if keyword in s["Student Name"] or keyword in s["Violation"]:
+    for idx, students in enumerate(student, 1):
+        if (keyword in str(idx) or 
+            keyword in students["Student Name"].lower() or
+            keyword in students["Violation"].lower()):
             print("\n--- Record Found ---")
-            for key, value in s.items():
+            print(f"Student #{idx}:")
+            for key, value in students.items():
                 print(f"{key}: {value}")
             found = True
 
@@ -89,20 +94,17 @@ def main():
         
         match choice:
             case '1':
-                list_all(student_record)
+                list_all_records(student_record)
             case '2':
                 add_record(student_record)
             case '3':
-                #TODO(Besa): Do update_record.
                 update_record(student_record)
             case '4':
-                #TODO(Maestre): Do delete_record.
                 delete_record(student_record)
             case '5':
-                #TODO(Salespara): Do search_student.
                 search_student(student_record)
             case '6':
-                print("Exiting the program. Goodbye!")
+                print("Program Terminated.")
                 break
             case _:
                 print("Invalid choice. Please enter a number between 1 and 6.")
