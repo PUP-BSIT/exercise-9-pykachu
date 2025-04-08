@@ -1,4 +1,4 @@
-def print_menu():
+def student_menu():
     print("\n===== Student Violation System =====")
     print("1. List All")
     print("2. Add")
@@ -14,16 +14,35 @@ def list_all(student):
         for num, student in enumerate(student, 1):
             print(f"\nStudent #{num}:")
             for key, value in student.items():
-                print(f"  {key}: {value}")    
+                print(f"  {key}: {value}")
+
+def update_record(student):
+    list_all(student)
+
+    record_id = int(input("Enter the ID of the record to update: "))  
+
+    if 0 <= record_id < len(student):
+        print("Leave blank to keep current ID.")
+
+        for key in student[record_id]:
+            new_value = input(f"{key} ({student[record_id][key]}): ")
+
+            if new_value:
+                student[record_id][key] = new_value
+        print("Student record updated successfully!")
+    else:
+        print("Invalid ID.")
+
+    return student
 
 def main():
     student_record = [
-        {'Name': 'Bench', 'Id': 10012, 'Course': 'BSIT', 
+        {'Name': 'Bench', 'Id': 10012, 'Course & Year': 'BSIT', 
           'Violation': 'No ID', 'Date': 'January 10, 2025'}
     ]
 
     while True:
-        print_menu()
+        student_menu()
         choice = input("Enter your choice (1-6): ")
         
         match choice:
