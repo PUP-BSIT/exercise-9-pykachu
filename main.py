@@ -21,9 +21,11 @@ def main():
         {'Name': 'Bench', 'Id': 10012, 'Course': 'BSIT', 
           'Violation': 'No ID', 'Date': 'January 10, 2025'}
     ]
+
     while True:
         print_menu()
         choice = input("Enter your choice (1-6): ")
+        
         match choice:
             case '1':
                 list_all(student_record)
@@ -45,5 +47,4 @@ def main():
             case _:
                 print("Invalid choice. Please enter a number between 1 and 6.")
 
-if __name__ == "__main__":
-    main()
+main()
